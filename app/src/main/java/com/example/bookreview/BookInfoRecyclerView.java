@@ -14,8 +14,7 @@ import com.bumptech.glide.Glide;
 import java.util.ArrayList;
 
 public class BookInfoRecyclerView extends
-        RecyclerView.Adapter<BookInfoRecyclerView.BookInfoViewHolder> implements
-        NetworkingServiceForBooks.NetworkingListener{
+        RecyclerView.Adapter<BookInfoRecyclerView.BookInfoViewHolder> {
     BookInfoViewHolder vholder;
 
     public BookInfoRecyclerView(ArrayList<Book> book_list,Context context) {
@@ -26,17 +25,6 @@ public class BookInfoRecyclerView extends
     ArrayList<Book> book_list;
     Context context;
     BookItemListener listener;
-
-    @Override
-    public void jsonValuesFetched(String jsonString) {
-
-    }
-
-    @Override
-    public void gettingImageIsCompleted(Bitmap image) {
-       // vholder.img.setImageBitmap(image);
-    }
-
 
     interface BookItemListener{
         public void onItemClick(int pos);
@@ -50,16 +38,8 @@ public class BookInfoRecyclerView extends
 
     @Override
     public void onBindViewHolder(@NonNull BookInfoViewHolder holder, int position) {
-
         holder.bookTitle.setText(book_list.get(position).getTitle());
-        //Picasso.with(context).load(book_list.get(position.ge))
-       // System.out.println("**"+book_list.get(position).getThumbnail());
-//        ((MyApp)context.getApplicationContext()).networkingServiceForBooks.
-//                gettingImage(book_list.get(position).getThumbnail());
-//        vholder=holder;
       Glide.with(context).load(book_list.get(position).getThumbnail()).into(holder.img);
-//        Picasso.with(context).load(book_list.get(position).getThumbnail())
-//                .into(holder.img);
 
     }
 
