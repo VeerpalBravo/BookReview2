@@ -2,6 +2,8 @@ package com.example.bookreview;
 
 import android.graphics.Bitmap;
 
+import org.json.JSONArray;
+
 import java.util.ArrayList;
 
 public class Book {
@@ -15,18 +17,93 @@ public class Book {
         private String publishedDate;
         private String description;
         private int pageCount;
+        private ArrayList<String> category;
         private String thumbnail;
         private String previewLink;
         private String infoLink;
         private String buyLink;
+        private String saleability;
+        private String currencyCode;
+        private double amount;
+        private String id;
 
-        // creating getter and setter methods
+    public Book(String title, String subtitle, ArrayList<String> authors, String publisher,
+                String publishedDate, String description, int pageCount, ArrayList<String> category, String thumbnail,
+                String infoLink, String buyLink, String saleability, String currencyCode,
+                double amount, String id) {
+        this.title = title;
+        this.subtitle = subtitle;
+        this.authors = authors;
+        this.publisher = publisher;
+        this.publishedDate = publishedDate;
+        this.description = description;
+        this.pageCount = pageCount;
+        this.category = category;
+        this.thumbnail = thumbnail;
+        this.infoLink = infoLink;
+        this.buyLink = buyLink;
+        this.saleability = saleability;
+        this.currencyCode = currencyCode;
+        this.amount = amount;
+        this.id = id;
+    }
+// creating getter and setter methods
+public double getAmount() {
+    return amount;
+}
+
+    public void setAmount(double category) {
+        this.amount = amount;
+    }
+    public String getSaleability() {
+        return saleability;
+    }
+
+    public void setSaleability(String  saleability) {
+        this.saleability = saleability;
+    }
+
+    public String getCurrencyCode() {
+        return currencyCode;
+    }
+
+    public void setCurrencyCode(String  currencyCode) {
+        this.currencyCode = currencyCode;
+    }
+    public String getinfoLink() {
+        return infoLink;
+    }
+
+    public void setinfoLink(String  infoLink) {
+        this.infoLink = infoLink;
+    }
+    public String getBuyLink() {
+        return buyLink;
+    }
+
+    public void setBuyLink(String  buyLink) {
+        this.buyLink = buyLink;
+    }
+        public ArrayList<String> getCategory() {
+            return category;
+        }
+
+        public void setCategory(ArrayList category) {
+            this.category = category;
+        }
         public String getTitle() {
             return title;
         }
 
         public void setTitle(String title) {
             this.title = title;
+        }
+        public String getId() {
+            return id;
+        }
+
+        public void setId(String id) {
+            this.id = id;
         }
 
         public String getSubtitle() {
@@ -109,7 +186,7 @@ public class Book {
         this.infoLink = infoLink;
         this.buyLink = buyLink;
     }
-    public Book(String title, String thumbnail){
+    public Book(String title, String thumbnail, String subtitle,String id){
             this.title = title;
             this.thumbnail = thumbnail;
     }

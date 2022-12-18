@@ -8,7 +8,7 @@
     <ImageView
         android:id="@+id/bookImage"
         android:layout_width="match_parent"
-        android:layout_height="150dp"
+        android:layout_height="150sp"
         android:layout_gravity="center"
         android:src="@drawable/ic_launcher_background"
         />
@@ -19,5 +19,5 @@
         android:hint="@string/book_title"
         android:gravity="center"
         android:textSize="20sp"
-        android:textColor="@color/black"/>
+        android:textColor="@color/purple_500"/>
 </LinearLayout>

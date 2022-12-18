@@ -28,7 +28,7 @@ import java.io.InputStream;
 import java.net.URL;
 import java.util.ArrayList;
 
-public class MainActivity extends AppCompatActivity implements BookInfoRecyclerView.BookItemListener{
+public class MainActivity extends AppCompatActivity {
 
     TabLayout tabLayout;
     ViewPager2 viewPager2;
@@ -78,8 +78,8 @@ public class MainActivity extends AppCompatActivity implements BookInfoRecyclerV
             public boolean onQueryTextSubmit(String query) {
 
                 if(query.length()>2){
+                    ((MyApp)getApplication()).query=query;
                     Intent book = new Intent(MainActivity.this,BooksListRecyclerView.class);
-                    book.putExtra("query",query);
                     startActivity(book);
 
                 }
@@ -93,12 +93,6 @@ public class MainActivity extends AppCompatActivity implements BookInfoRecyclerV
 
         });
         return true;
-
-    }
-
-
-    @Override
-    public void onItemClick(int pos) {
 
     }
 

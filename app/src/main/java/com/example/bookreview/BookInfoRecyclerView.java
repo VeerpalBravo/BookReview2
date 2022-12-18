@@ -15,7 +15,6 @@ import java.util.ArrayList;
 
 public class BookInfoRecyclerView extends
         RecyclerView.Adapter<BookInfoRecyclerView.BookInfoViewHolder> {
-    BookInfoViewHolder vholder;
 
     public BookInfoRecyclerView(ArrayList<Book> book_list,Context context) {
         this.book_list = book_list;
@@ -24,9 +23,9 @@ public class BookInfoRecyclerView extends
 
     ArrayList<Book> book_list;
     Context context;
-    BookItemListener listener;
+    ItemClickListener listener;
 
-    interface BookItemListener{
+    interface ItemClickListener{
         public void onItemClick(int pos);
     }
     @NonNull

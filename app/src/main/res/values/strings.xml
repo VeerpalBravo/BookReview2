@@ -6,4 +6,14 @@
     <string name="search_book">Search Book</string>
     <string name="recently_reviewed_book">Recently Reviewed Book</string>
     <string name="maximum_reviewed_book">Maximum Reviewed Book</string>
+    <string name="title">Title</string>
+    <string name="subtitle">subtitle</string>
+    <string name="author">author</string>
+    <string name="category">category</string>
+    <string name="bookprice">BookPrice</string>
+    <string name="publisher">publisher</string>
+    <string name="publishdate">publishdate</string>
+    <string name="rate_this_book">Rate this Book</string>
+    <string name="review_comments">Review Comments</string>
+    <string name="buy_this_book">Buy this Book</string>
 </resources>

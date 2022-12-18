@@ -11,7 +11,7 @@ public class MyApp extends Application {
     JsonService jsonService = new JsonService();
     static ExecutorService executorService = Executors.newFixedThreadPool(4);
     NetworkingServiceForBooks networkingServiceForBooks = new NetworkingServiceForBooks();
-
+    String query = " ";
 
 
 }
