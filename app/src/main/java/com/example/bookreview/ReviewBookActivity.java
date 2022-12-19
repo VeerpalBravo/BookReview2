@@ -9,18 +9,21 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Toast;
+import android.widget.ToggleButton;
+
+import com.google.android.material.button.MaterialButtonToggleGroup;
 
 public class ReviewBookActivity extends AppCompatActivity implements View.OnClickListener{
 
-    ImageButton starbtn1;
-    ImageButton starbtn2;
-    ImageButton starbtn3;
-    ImageButton starbtn4;
-    ImageButton starbtn5;
+    ToggleButton starbtn1;
+    ToggleButton starbtn2;
+    ToggleButton starbtn3;
+    ToggleButton starbtn4;
+    ToggleButton starbtn5;
     Button save;
     Button cancel;
     EditText comment;
-    int rating;
+    MaterialButtonToggleGroup toggleButtonGroup;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,35 +42,78 @@ public class ReviewBookActivity extends AppCompatActivity implements View.OnClic
         starbtn3.setOnClickListener(this);
         starbtn4.setOnClickListener(this);
         starbtn5.setOnClickListener(this);
+
+    }
+    private void showToast(String str) {
+        Toast.makeText(this, str, Toast.LENGTH_SHORT).show();
     }
 
     @Override
     public void onClick(View view) {
+        int rating=0;
         switch (view.getId()){
             case R.id.star1:
+                if(starbtn1.isChecked()){
                 rating=1;
+                    starbtn1.setClickable(false);
+                    starbtn2.setClickable(false);
+                    starbtn3.setClickable(false);
+                    starbtn4.setClickable(false);
+                    starbtn5.setClickable(false);}
                 break;
             case R.id.star2:
+                if(starbtn2.isChecked()){
                 rating=2;
+                    starbtn1.setChecked(true);
+                    starbtn1.setClickable(false);
+                    starbtn2.setClickable(false);
+                    starbtn3.setClickable(false);
+                    starbtn4.setClickable(false);
+                    starbtn5.setClickable(false);
+                }
                 break;
             case R.id.star3:
+                if(starbtn3.isChecked()){
                 rating=3;
+                    starbtn1.setChecked(true);
+                    starbtn2.setChecked(true);
+                    starbtn1.setClickable(false);
+                    starbtn2.setClickable(false);
+                    starbtn3.setClickable(false);
+                    starbtn4.setClickable(false);
+                    starbtn5.setClickable(false);
+                    }
                 break;
             case R.id.star4:
-                rating=4;
+                if(starbtn4.isChecked()){
+                    rating=4;
+                    starbtn1.setChecked(true);
+                    starbtn2.setChecked(true);
+                    starbtn3.setChecked(true);
+                    starbtn1.setClickable(false);
+                    starbtn2.setClickable(false);
+                    starbtn3.setClickable(false);
+                    starbtn4.setClickable(false);
+                    starbtn5.setClickable(false);}
                 break;
             case R.id.star5:
-                rating=5;
-//                starbtn1.setImageResource(R.drawable.ic_baseline_star_24);
-//                starbtn2.setImageResource(R.drawable.ic_baseline_star_24);
-//                starbtn3.setImageResource(R.drawable.ic_baseline_star_24);
-//                starbtn4.setImageResource(R.drawable.ic_baseline_star_24);
-//                starbtn5.setImageResource(R.drawable.ic_baseline_star_24);
+                if(starbtn5.isChecked()) {
+                    rating = 5;
+                    starbtn1.setChecked(true);
+                    starbtn2.setChecked(true);
+                    starbtn3.setChecked(true);
+                    starbtn4.setChecked(true);
+                    starbtn1.setClickable(false);
+                    starbtn2.setClickable(false);
+                    starbtn3.setClickable(false);
+                    starbtn4.setClickable(false);
+                    starbtn5.setClickable(false);
+                }
                 break;
             default:
                 break;
 
         }
         Toast.makeText(this,"rating value: "+rating, Toast.LENGTH_SHORT).show();
-    }
+   }
 }

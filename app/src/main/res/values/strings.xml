@@ -16,4 +16,5 @@
     <string name="rate_this_book">Rate this Book</string>
     <string name="review_comments">Review Comments</string>
     <string name="buy_this_book">Buy this Book</string>
+    <string name="instruction">You can select star once only, not able to update</string>
 </resources>
