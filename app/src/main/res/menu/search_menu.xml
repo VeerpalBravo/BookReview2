@@ -4,7 +4,7 @@
 
     <item
         android:id="@+id/book_searchView"
-        android:title="searchCity"
+        android:title="searchBook"
         app:actionViewClass="androidx.appcompat.widget.SearchView"
         app:showAsAction="always"
         />

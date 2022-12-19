@@ -23,7 +23,7 @@
         android:id="@+id/guideline3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintGuide_percent=".7"
+        app:layout_constraintGuide_percent=".85"
         android:orientation="horizontal">
 
     </androidx.constraintlayout.widget.Guideline>
@@ -127,48 +127,54 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:textSize="20sp"
-        android:layout_weight="1.5"/>
+        android:layout_weight="1"/>
     <TextView
         android:id="@+id/descriptionPerformFunc"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="3.5"/>
-    </LinearLayout>
-    <LinearLayout
-        android:id="@+id/ll4"
-        android:layout_width="match_parent"
-        android:padding="5dp"
-        android:layout_height="0dp"
-        android:orientation="vertical"
-        app:layout_constraintTop_toBottomOf="@id/guideline3"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
+        android:layout_weight="3"
+        android:layout_margin="20dp"/>
         <Button
             android:id="@+id/RateBookBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/rate_this_book"
+            android:layout_weight=".5"
             android:layout_gravity="center"/>
-    <LinearLayout
-        android:id="@+id/ll5"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <Button
-            android:id="@+id/ReviewCommentsBtn"
+        <LinearLayout
+            android:id="@+id/ll5"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/review_comments"
-            android:layout_marginRight="10dp"
-            />
-        <Button
-            android:id="@+id/buyThisBookBtn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/buy_this_book"
-            android:layout_marginLeft="10dp"
-            />
+            android:layout_gravity="center_horizontal"
+            android:layout_weight=".5">
+            <Button
+                android:id="@+id/ReviewCommentsBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/review_comments"
+                android:layout_marginRight="10dp"
+                />
+            <Button
+                android:id="@+id/buyThisBookBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/buy_this_book"
+                android:layout_marginLeft="10dp"
+                />
+        </LinearLayout>
     </LinearLayout>
 
-    </LinearLayout>
+<!--    <com.google.android.material.bottomnavigation.BottomNavigationView-->
+<!--        android:id="@+id/bottomnavi"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:background="@color/black"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:menu="@menu/bottom_nav_bar">-->
+
+<!--    </com.google.android.material.bottomnavigation.BottomNavigationView>-->
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>

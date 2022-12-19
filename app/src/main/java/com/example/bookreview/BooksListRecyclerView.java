@@ -13,6 +13,7 @@ public class BooksListRecyclerView extends AppCompatActivity implements Networki
         BookInfoRecyclerView.ItemClickListener {
 
     RecyclerView bookList;
+    String query;
     BookInfoRecyclerView adapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,14 +23,15 @@ public class BooksListRecyclerView extends AppCompatActivity implements Networki
         setTitle("Book List");
         ((MyApp)getApplication()).sb.getBookList().clear();
         ((MyApp)getApplication()).sb.getFullDescBookList().clear();
-        ((MyApp)getApplication()).query="";
-        setAdapterFunc();
+
+        Intent intent = getIntent();
+        query = intent.getStringExtra("query");
+        ((MyApp)getApplication()).query=query;
 
    }
-   protected void setAdapterFunc(){
-       //Intent intent = getIntent();
-       String query = ((MyApp)getApplication()).query;
-       ((MyApp)getApplication()).networkingServiceForBooks.getAllBooks(query);
+   protected void setAdapterFunc(String newQuery){
+
+       ((MyApp)getApplication()).networkingServiceForBooks.getAllBooks(newQuery);
        bookList = findViewById(R.id.book_list);
        adapter = new
                BookInfoRecyclerView(((MyApp)getApplication()).sb
@@ -44,7 +46,33 @@ public class BooksListRecyclerView extends AppCompatActivity implements Networki
     @Override
     protected void onResume() {
         super.onResume();
+        setAdapterFunc(((MyApp)getApplication()).query);
+        Log.d("queryValueResume",((MyApp)getApplication()).query);
+    }
 
+    @Override
+    protected void onPause() {
+        super.onPause();
+
+
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        
     }
 
     @Override

@@ -1,12 +1,14 @@
 package com.example.bookreview;
 
 import android.graphics.Bitmap;
+import android.os.Parcel;
+import android.os.Parcelable;
 
 import org.json.JSONArray;
 
 import java.util.ArrayList;
 
-public class Book {
+public class Book implements Parcelable {
             // creating string, int and array list
         // variables for our book details
 
@@ -28,9 +30,9 @@ public class Book {
         private String id;
 
     public Book(String title, String subtitle, ArrayList<String> authors, String publisher,
-                String publishedDate, String description, int pageCount, ArrayList<String> category, String thumbnail,
-                String infoLink, String buyLink, String saleability, String currencyCode,
-                double amount, String id) {
+                String publishedDate, String description, int pageCount, ArrayList<String> category,
+                String thumbnail,String infoLink, String buyLink, String saleability,
+                String currencyCode,double amount, String id) {
         this.title = title;
         this.subtitle = subtitle;
         this.authors = authors;
@@ -47,7 +49,40 @@ public class Book {
         this.amount = amount;
         this.id = id;
     }
-// creating getter and setter methods
+
+    protected Book(Parcel in) {
+        id = in.readString();
+        title = in.readString();
+        subtitle = in.readString();
+        authors = in.createStringArrayList();
+        publisher = in.readString();
+        publishedDate = in.readString();
+        description = in.readString();
+        pageCount = in.readInt();
+        category = in.createStringArrayList();
+        thumbnail = in.readString();
+        previewLink = in.readString();
+        infoLink = in.readString();
+        buyLink = in.readString();
+        saleability = in.readString();
+        currencyCode = in.readString();
+        amount = in.readDouble();
+
+    }
+
+    public static final Creator<Book> CREATOR = new Creator<Book>() {
+        @Override
+        public Book createFromParcel(Parcel in) {
+            return new Book(in);
+        }
+
+        @Override
+        public Book[] newArray(int size) {
+            return new Book[size];
+        }
+    };
+
+    // creating getter and setter methods
 public double getAmount() {
     return amount;
 }
@@ -191,4 +226,27 @@ public double getAmount() {
             this.thumbnail = thumbnail;
     }
 
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+    @Override
+    public void writeToParcel(Parcel parcel, int i) {
+        parcel.writeString(id);
+        parcel.writeString(title);
+        parcel.writeString(subtitle);
+        parcel.writeStringList(authors);
+        parcel.writeString(publisher);
+        parcel.writeString(publishedDate);
+        parcel.writeString(description);
+        parcel.writeInt(pageCount);
+        parcel.writeStringList(category);
+        parcel.writeString(thumbnail);
+        parcel.writeString(previewLink);
+        parcel.writeString(infoLink);
+        parcel.writeString(buyLink);
+        parcel.writeString(saleability);
+        parcel.writeString(currencyCode);
+        parcel.writeDouble(amount);
+    }
 }

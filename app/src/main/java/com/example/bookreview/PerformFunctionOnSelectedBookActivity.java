@@ -6,6 +6,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.Html;
 import android.text.method.LinkMovementMethod;
+import android.text.method.ScrollingMovementMethod;
+import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -39,6 +41,7 @@ public class PerformFunctionOnSelectedBookActivity extends AppCompatActivity {
         author=findViewById(R.id.authorPerformFunc);
         category=findViewById(R.id.categoryPerformFunc);
         description=findViewById(R.id.descriptionPerformFunc);
+        description.setMovementMethod(new ScrollingMovementMethod());
         amount=findViewById(R.id.pricePerformFunc);
         publisher=findViewById(R.id.publisherPerformFunc);
         publishedDate=findViewById(R.id.publishDatePerformFunc);
@@ -48,7 +51,15 @@ public class PerformFunctionOnSelectedBookActivity extends AppCompatActivity {
         bookRatingBtn=findViewById(R.id.RateBookBtn);
         hyperTextLink=findViewById(R.id.hyperTextLinkPerformFunc);
         showBookDescription(position);
-
+        bookRatingBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent reviewActivityLink = new Intent(PerformFunctionOnSelectedBookActivity.this,
+                        ReviewBookActivity.class);
+                reviewActivityLink.putExtra("title",title.getText().toString());
+                startActivity(reviewActivityLink);
+            }
+        });
     }
     public void showBookDescription(int pos){
         String linkUrl=((MyApp)getApplication()).sb.getFullDescBookList().get(pos).getThumbnail();
