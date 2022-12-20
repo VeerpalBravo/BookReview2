@@ -18,8 +18,7 @@ import com.bumptech.glide.Glide;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-public class PerformFunctionOnSelectedBookActivity extends AppCompatActivity implements
-DBManager.DataBaseListener{
+public class PerformFunctionOnSelectedBookActivity extends AppCompatActivity {
     TextView hyperTextLink;
     TextView title;
     TextView subtitle;
@@ -40,8 +39,7 @@ DBManager.DataBaseListener{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_perform_function_on_selected_book);
         setTitle("Book Description");
-        Intent intent = getIntent();
-        int position = intent.getExtras().getInt("position");
+        int position =((MyApp)getApplication()).pos;
         title=findViewById(R.id.titlePerformFunc);
         subtitle=findViewById(R.id.subtitlePerformFunc);
         author=findViewById(R.id.authorPerformFunc);
@@ -70,16 +68,11 @@ DBManager.DataBaseListener{
         reviewbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ((MyApp)getApplication()).db.getAllComments(bookID);
+                Intent bookComments = new Intent(PerformFunctionOnSelectedBookActivity.this,
+                        BookReviewCommentsActivity.class);
+                startActivity(bookComments);
             }
         });
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        ((MyApp)getApplication()).db.listener=this;
-        ((MyApp)getApplication()).db.getDB(PerformFunctionOnSelectedBookActivity.this);
     }
 
     public void showBookDescription(int pos){
@@ -87,15 +80,22 @@ DBManager.DataBaseListener{
         String url ="<a href=\"link\">"+linkUrl+"</a>";
         bookID=((MyApp)getApplication()).sb.getFullDescBookList().get(pos).getId();
         title.setText("Title: "+((MyApp)getApplication()).sb.getFullDescBookList().get(pos).getTitle());
+        title.setTextColor(getResources().getColor(R.color.purple_500));
         subtitle.setText("Subtitle: "+((MyApp)getApplication()).sb.getFullDescBookList().get(pos).getSubtitle());
+        subtitle.setTextColor(getResources().getColor(R.color.purple_200));
         publisher.setText("Publisher name: "+((MyApp)getApplication()).sb.getFullDescBookList().get(pos).getPublisher());
+        publisher.setTextColor(getResources().getColor(R.color.black));
+        publishedDate.setTextColor(getResources().getColor(R.color.black));
         publishedDate.setText("Published on: "+((MyApp)getApplication()).sb.getFullDescBookList().get(pos).getPublishedDate());
         hyperTextLink.setText(Html.fromHtml(url));
+        hyperTextLink.setTextColor(getResources().getColor(R.color.purple_500));
         hyperTextLink.setMovementMethod(LinkMovementMethod.getInstance());
+        description.setTextColor(getResources().getColor(R.color.black));
         description.setText("Description Of Book: "+((MyApp)getApplication()).sb.getFullDescBookList().get(pos).getDescription());
         if(((MyApp)getApplication()).sb.getFullDescBookList().get(pos).getSaleability().equals("FOR_SALE")) {
             amount.setText("Price of Book: "+((MyApp) getApplication()).sb.getFullDescBookList().get(pos).getAmount() +
                     ((MyApp) getApplication()).sb.getFullDescBookList().get(pos).getCurrencyCode());
+            amount.setTextColor(getResources().getColor(R.color.black));
         }
         else
         {
@@ -103,10 +103,12 @@ DBManager.DataBaseListener{
         }
         int categorySize=((MyApp)getApplication()).sb.getFullDescBookList().get(pos).getCategory().size();
         for(int i=0;i<categorySize;i++){
+            category.setTextColor(getResources().getColor(R.color.Coral));
             category.setText("Genre: "+((MyApp)getApplication()).sb.getFullDescBookList().get(pos).getCategory().get(i));
         }
         int No_of_authors=((MyApp)getApplication()).sb.getFullDescBookList().get(pos).getAuthors().size();
         for(int i=0;i<No_of_authors;i++){
+            author.setTextColor(getResources().getColor(R.color.Red));
             author.setText("Author: "+((MyApp)getApplication()).sb.getFullDescBookList().get(pos).getAuthors().get(i));
         }
         Glide.with(this).load(((MyApp)getApplication()).sb.getFullDescBookList().get(pos).
@@ -115,21 +117,4 @@ DBManager.DataBaseListener{
 
     }
 
-    @Override
-    public void insertingCommentsCompleted() {
-
-    }
-
-    @Override
-    public void gettingCommentsCompleted(Comments[] list) {
-        ArrayList<Comments> clist = new ArrayList( Arrays.asList(list));
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-
-        for(int i=0;i<clist.size();i++){
-            builder.setMessage(clist.get(i).getComment()+" "+
-                    clist.get(i).getBookID()+" "+clist.get(i).getRating()).show();
-            System.out.println(clist.get(i));
-        }
-
-    }
 }

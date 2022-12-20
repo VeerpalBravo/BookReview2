@@ -35,7 +35,6 @@ public class BooksListRecyclerView extends AppCompatActivity implements Networki
        adapter = new
                BookInfoRecyclerView(((MyApp)getApplication()).sb
                .getBookList(), this);
-       //Log.d("NewValue", ((MyApp)getApplication()).sb.getBookList().get(0).getTitle());
        adapter.listener=this;
        bookList.setAdapter(adapter);
        LinearLayoutManager linearLayoutManager=new LinearLayoutManager(this);
@@ -77,7 +76,7 @@ public class BooksListRecyclerView extends AppCompatActivity implements Networki
     @Override
     public void onItemClick(int pos) {
         Intent intent=new Intent(BooksListRecyclerView.this,PerformFunctionOnSelectedBookActivity.class);
-        intent.putExtra("position",pos);
+        ((MyApp)getApplication()).pos=pos;
         startActivity(intent);
     }
 

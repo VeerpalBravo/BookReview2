@@ -6,6 +6,8 @@ import android.os.Looper;
 
 import androidx.room.Room;
 
+import java.util.ArrayList;
+
 public class DBManager {
     interface DataBaseListener{
         void insertingCommentsCompleted();

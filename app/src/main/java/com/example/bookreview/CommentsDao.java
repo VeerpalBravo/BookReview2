@@ -6,6 +6,8 @@ import androidx.room.Entity;
 import androidx.room.Insert;
 import androidx.room.Query;
 
+import java.util.ArrayList;
+
 @Dao
 public interface CommentsDao {
     @Insert

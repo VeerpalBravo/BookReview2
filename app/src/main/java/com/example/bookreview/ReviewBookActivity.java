@@ -1,5 +1,6 @@
 package com.example.bookreview;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -13,6 +14,8 @@ import android.widget.ToggleButton;
 
 import com.google.android.material.button.MaterialButtonToggleGroup;
 import com.google.android.material.textfield.TextInputEditText;
+
+import java.util.ArrayList;
 
 public class ReviewBookActivity extends AppCompatActivity implements View.OnClickListener,
 DBManager.DataBaseListener{
@@ -55,6 +58,8 @@ DBManager.DataBaseListener{
             @Override
             public void onClick(View view) {
                 ((MyApp)getApplication()).db.insertNewCommentAsync(new Comments(bookID,rating,comment.getText().toString()));
+                AlertDialog.Builder builder =new AlertDialog.Builder(ReviewBookActivity.this);
+                builder.setMessage("Your comment saved.").show();
             }
         });
 

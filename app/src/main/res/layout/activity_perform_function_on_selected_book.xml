@@ -23,7 +23,7 @@
         android:id="@+id/guideline3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintGuide_percent=".85"
+        app:layout_constraintGuide_percent=".9"
         android:orientation="horizontal">
 
     </androidx.constraintlayout.widget.Guideline>
@@ -43,25 +43,24 @@
             android:id="@+id/imgPerformFunc"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="4"
+            android:layout_weight="3"
+            android:layout_gravity="center"
             />
         <TextView
             android:id="@+id/titlePerformFunc"
-            android:layout_weight=".5"
+            android:layout_weight="1"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_below="@id/imgPerformFunc"
-            android:hint="@string/title"
-            android:text="@string/book_title"
-            android:textSize="20sp"/>
+            android:hint="@string/book_title"
+            android:autoSizeTextType="uniform"/>
         <TextView
             android:id="@+id/subtitlePerformFunc"
-            android:layout_weight=".5"
+            android:layout_weight="1"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_below="@id/imgPerformFunc"
             android:hint="@string/subtitle"
-            android:textSize="20sp"/>
+            android:autoSizeTextType="uniform"/>
     </LinearLayout>
     <LinearLayout
         android:padding="5dp"
@@ -80,7 +79,7 @@
             android:layout_height="0dp"
             android:hint="@string/author"
             android:layout_weight="1"
-            android:textSize="20sp"
+            android:autoSizeTextType="uniform"
             />
         <TextView
             android:id="@+id/categoryPerformFunc"
@@ -88,28 +87,28 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:hint="@string/category"
-            android:textSize="20sp"/>
+            android:autoSizeTextType="uniform"/>
         <TextView
             android:id="@+id/pricePerformFunc"
             android:layout_weight="1"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:hint="@string/bookprice"
-            android:textSize="20sp"/>
+            android:autoSizeTextType="uniform"/>
         <TextView
             android:id="@+id/publisherPerformFunc"
             android:layout_weight="1"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:hint="@string/publisher"
-            android:textSize="20sp"/>
+            android:autoSizeTextType="uniform"/>
         <TextView
             android:id="@+id/publishDatePerformFunc"
             android:layout_weight="1"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:hint="@string/publishdate"
-            android:textSize="20sp"/>
+            android:autoSizeTextType="uniform"/>
     </LinearLayout>
     <LinearLayout
         android:id="@+id/ll3"
@@ -121,45 +120,57 @@
         app:layout_constraintBottom_toTopOf="@id/guideline3"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintVertical_weight="5">
+        app:layout_constraintVertical_weight="6.5">
     <TextView
         android:id="@+id/hyperTextLinkPerformFunc"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:textSize="20sp"
-        android:layout_weight="1"/>
+        android:autoSizeTextType="uniform"
+        android:layout_weight="1.5"/>
     <TextView
         android:id="@+id/descriptionPerformFunc"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="3"
+        android:layout_weight="2"
+        android:text="Description: "
+        android:textColor="@color/Red"
+        android:autoSizeTextType="uniform"
         android:layout_margin="20dp"/>
         <Button
             android:id="@+id/RateBookBtn"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
             android:text="@string/rate_this_book"
-            android:layout_weight=".5"
-            android:layout_gravity="center"/>
+            android:autoSizeTextType="uniform"
+            android:layout_weight="1.5"
+            android:layout_gravity="center"
+            android:backgroundTint="@color/teal_700"
+            android:textColor="@color/black"/>
         <LinearLayout
             android:id="@+id/ll5"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
             android:layout_gravity="center_horizontal"
-            android:layout_weight=".5">
+            android:layout_weight="1.5">
             <Button
                 android:id="@+id/ReviewCommentsBtn"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:text="@string/review_comments"
+                android:autoSizeTextType="uniform"
                 android:layout_marginRight="10dp"
+                android:backgroundTint="@color/teal_200"
+                android:textColor="@color/black"
                 />
             <Button
                 android:id="@+id/buyThisBookBtn"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:text="@string/buy_this_book"
                 android:layout_marginLeft="10dp"
+                android:autoSizeTextType="uniform"
+                android:backgroundTint="@color/teal_200"
+                android:textColor="@color/black"
                 />
         </LinearLayout>
     </LinearLayout>
