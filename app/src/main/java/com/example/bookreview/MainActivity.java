@@ -78,6 +78,7 @@ public class MainActivity extends AppCompatActivity {
             public boolean onQueryTextSubmit(String query) {
 
                 if(query.length()>2){
+                    ((MyApp)getApplication()).query=query;
                     Intent book = new Intent(MainActivity.this,BooksListRecyclerView.class);
                     book.putExtra("query",query);
                     startActivity(book);

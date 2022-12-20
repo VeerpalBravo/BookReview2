@@ -1,5 +1,6 @@
 package com.example.bookreview;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -14,7 +15,11 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 
-public class PerformFunctionOnSelectedBookActivity extends AppCompatActivity {
+import java.util.ArrayList;
+import java.util.Arrays;
+
+public class PerformFunctionOnSelectedBookActivity extends AppCompatActivity implements
+DBManager.DataBaseListener{
     TextView hyperTextLink;
     TextView title;
     TextView subtitle;
@@ -28,6 +33,7 @@ public class PerformFunctionOnSelectedBookActivity extends AppCompatActivity {
     Button buyBtn;
     Button reviewbtn;
     Button bookRatingBtn;
+    String bookID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,13 +63,29 @@ public class PerformFunctionOnSelectedBookActivity extends AppCompatActivity {
                 Intent reviewActivityLink = new Intent(PerformFunctionOnSelectedBookActivity.this,
                         ReviewBookActivity.class);
                 reviewActivityLink.putExtra("title",title.getText().toString());
+                reviewActivityLink.putExtra("bookID",bookID);
                 startActivity(reviewActivityLink);
             }
         });
+        reviewbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ((MyApp)getApplication()).db.getAllComments(bookID);
+            }
+        });
     }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        ((MyApp)getApplication()).db.listener=this;
+        ((MyApp)getApplication()).db.getDB(PerformFunctionOnSelectedBookActivity.this);
+    }
+
     public void showBookDescription(int pos){
         String linkUrl=((MyApp)getApplication()).sb.getFullDescBookList().get(pos).getThumbnail();
         String url ="<a href=\"link\">"+linkUrl+"</a>";
+        bookID=((MyApp)getApplication()).sb.getFullDescBookList().get(pos).getId();
         title.setText("Title: "+((MyApp)getApplication()).sb.getFullDescBookList().get(pos).getTitle());
         subtitle.setText("Subtitle: "+((MyApp)getApplication()).sb.getFullDescBookList().get(pos).getSubtitle());
         publisher.setText("Publisher name: "+((MyApp)getApplication()).sb.getFullDescBookList().get(pos).getPublisher());
@@ -90,6 +112,24 @@ public class PerformFunctionOnSelectedBookActivity extends AppCompatActivity {
         Glide.with(this).load(((MyApp)getApplication()).sb.getFullDescBookList().get(pos).
                 getThumbnail()).into(img);
 
+
+    }
+
+    @Override
+    public void insertingCommentsCompleted() {
+
+    }
+
+    @Override
+    public void gettingCommentsCompleted(Comments[] list) {
+        ArrayList<Comments> clist = new ArrayList( Arrays.asList(list));
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+
+        for(int i=0;i<clist.size();i++){
+            builder.setMessage(clist.get(i).getComment()+" "+
+                    clist.get(i).getBookID()+" "+clist.get(i).getRating()).show();
+            System.out.println(clist.get(i));
+        }
 
     }
 }

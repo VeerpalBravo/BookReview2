@@ -12,8 +12,10 @@ import android.widget.Toast;
 import android.widget.ToggleButton;
 
 import com.google.android.material.button.MaterialButtonToggleGroup;
+import com.google.android.material.textfield.TextInputEditText;
 
-public class ReviewBookActivity extends AppCompatActivity implements View.OnClickListener{
+public class ReviewBookActivity extends AppCompatActivity implements View.OnClickListener,
+DBManager.DataBaseListener{
 
     ToggleButton starbtn1;
     ToggleButton starbtn2;
@@ -23,14 +25,19 @@ public class ReviewBookActivity extends AppCompatActivity implements View.OnClic
     Button save;
     Button cancel;
     EditText comment;
+    String bookID;
     MaterialButtonToggleGroup toggleButtonGroup;
+    int rating=0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_review_book);
+        ((MyApp)getApplication()).db.listener=this;
+        ((MyApp)getApplication()).db.getDB(this);
         Intent intent=getIntent();
         String title=intent.getStringExtra("title").replace("Title: "," ");
+        bookID=intent.getStringExtra("bookID");
         setTitle(title);
         starbtn1=findViewById(R.id.star1);
         starbtn2=findViewById(R.id.star2);
@@ -42,6 +49,14 @@ public class ReviewBookActivity extends AppCompatActivity implements View.OnClic
         starbtn3.setOnClickListener(this);
         starbtn4.setOnClickListener(this);
         starbtn5.setOnClickListener(this);
+        comment=findViewById(R.id.editText);
+        save=findViewById(R.id.saveBtn);
+        save.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ((MyApp)getApplication()).db.insertNewCommentAsync(new Comments(bookID,rating,comment.getText().toString()));
+            }
+        });
 
     }
     private void showToast(String str) {
@@ -49,8 +64,13 @@ public class ReviewBookActivity extends AppCompatActivity implements View.OnClic
     }
 
     @Override
+    protected void onResume() {
+        super.onResume();
+
+    }
+
+    @Override
     public void onClick(View view) {
-        int rating=0;
         switch (view.getId()){
             case R.id.star1:
                 if(starbtn1.isChecked()){
@@ -116,4 +136,14 @@ public class ReviewBookActivity extends AppCompatActivity implements View.OnClic
         }
         Toast.makeText(this,"rating value: "+rating, Toast.LENGTH_SHORT).show();
    }
+
+    @Override
+    public void insertingCommentsCompleted() {
+
+    }
+
+    @Override
+    public void gettingCommentsCompleted(Comments[] list) {
+
+    }
 }

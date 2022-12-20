@@ -26,7 +26,6 @@ public class BooksListRecyclerView extends AppCompatActivity implements Networki
 
         Intent intent = getIntent();
         query = intent.getStringExtra("query");
-        ((MyApp)getApplication()).query=query;
 
    }
    protected void setAdapterFunc(String newQuery){
