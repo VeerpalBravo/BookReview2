@@ -17,14 +17,15 @@ import java.util.ArrayList;
 public class BookReviewRecyclerView extends
         RecyclerView.Adapter<BookReviewRecyclerView.BookReviewViewHolder> {
 
+    ArrayList<Comments> comment_list=new ArrayList<>(0);
+    Context context;
+    BookReviewRecyclerView.ItemClickListener listener;
+
     public BookReviewRecyclerView(ArrayList<Comments> comment_list, Context context) {
         this.comment_list = comment_list;
         this.context = context;
     }
 
-    ArrayList<Comments> comment_list;
-    Context context;
-    BookReviewRecyclerView.ItemClickListener listener;
 
     interface ItemClickListener{
         public void onItemClick(int pos);
@@ -32,14 +33,15 @@ public class BookReviewRecyclerView extends
     @NonNull
     @Override
     public BookReviewRecyclerView.BookReviewViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View v= LayoutInflater.from(context).inflate(R.layout.book_list,parent,false);
+        View v= LayoutInflater.from(context).inflate(R.layout.comment_list,parent,false);
         return new BookReviewRecyclerView.BookReviewViewHolder(v);
     }
 
     @Override
     public void onBindViewHolder(@NonNull BookReviewRecyclerView.BookReviewViewHolder holder, int position) {
         holder.comment.setText(comment_list.get(position).getComment());
-        holder.comment.setText(comment_list.get(position).getRating());
+        String rating = comment_list.get(position).getRating()+" star";
+        holder.rating.setText(rating);
 
     }
 

@@ -62,6 +62,14 @@ DBManager.DataBaseListener{
                 builder.setMessage("Your comment saved.").show();
             }
         });
+        cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent backToPerfomFuncActivity = new Intent(ReviewBookActivity.this,
+                        PerformFunctionOnSelectedBookActivity.class);
+                startActivity(backToPerfomFuncActivity);
+            }
+        });
 
     }
     private void showToast(String str) {
@@ -149,6 +157,16 @@ DBManager.DataBaseListener{
 
     @Override
     public void gettingCommentsCompleted(Comments[] list) {
+
+    }
+
+    @Override
+    public void insertingBooksCompleted() {
+
+    }
+
+    @Override
+    public void gettingFavBooksCompleted(Book[] list) {
 
     }
 }

@@ -16,7 +16,6 @@ public interface CommentsDao {
     @Delete
     public void deleteComment(Comments dc);
 
-    @Query("select * from Comments where bookID =:bookIDForDelete ")
-    Comments[] getAllComments(String bookIDForDelete);
-
+    @Query("select * from Comments where bookID =:bookIDForSelect ")
+    Comments[] getAllComments(String bookIDForSelect);
 }

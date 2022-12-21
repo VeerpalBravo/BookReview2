@@ -21,8 +21,8 @@
             android:name=".BookReviewCommentsActivity"
             android:exported="false">
             <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".PerformFunctionOnSelectedBookActivity" />
         </activity>
         <activity
             android:name=".ReviewBookActivity"

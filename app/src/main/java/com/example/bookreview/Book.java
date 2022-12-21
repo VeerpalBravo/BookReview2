@@ -4,14 +4,18 @@ import android.graphics.Bitmap;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
+
 import org.json.JSONArray;
 
 import java.util.ArrayList;
-
+@Entity
 public class Book implements Parcelable {
             // creating string, int and array list
         // variables for our book details
-
+        @PrimaryKey
+        private int id;
         private String title;
         private String subtitle;
         private ArrayList<String> authors;
@@ -27,7 +31,7 @@ public class Book implements Parcelable {
         private String saleability;
         private String currencyCode;
         private double amount;
-        private String id;
+        private String bookid;
 
     public Book(String title, String subtitle, ArrayList<String> authors, String publisher,
                 String publishedDate, String description, int pageCount, ArrayList<String> category,
@@ -47,11 +51,12 @@ public class Book implements Parcelable {
         this.saleability = saleability;
         this.currencyCode = currencyCode;
         this.amount = amount;
-        this.id = id;
+        this.bookid = id;
     }
 
     protected Book(Parcel in) {
-        id = in.readString();
+        id=in.readInt();
+        bookid = in.readString();
         title = in.readString();
         subtitle = in.readString();
         authors = in.createStringArrayList();
@@ -134,11 +139,11 @@ public double getAmount() {
             this.title = title;
         }
         public String getId() {
-            return id;
+            return bookid;
         }
 
         public void setId(String id) {
-            this.id = id;
+            this.bookid = id;
         }
 
         public String getSubtitle() {
@@ -221,7 +226,7 @@ public double getAmount() {
         this.infoLink = infoLink;
         this.buyLink = buyLink;
     }
-    public Book(String title, String thumbnail, String subtitle,String id){
+    public Book(String title, String thumbnail){
             this.title = title;
             this.thumbnail = thumbnail;
     }
@@ -232,7 +237,8 @@ public double getAmount() {
     }
     @Override
     public void writeToParcel(Parcel parcel, int i) {
-        parcel.writeString(id);
+        parcel.writeInt(id);
+        parcel.writeString(bookid);
         parcel.writeString(title);
         parcel.writeString(subtitle);
         parcel.writeStringList(authors);

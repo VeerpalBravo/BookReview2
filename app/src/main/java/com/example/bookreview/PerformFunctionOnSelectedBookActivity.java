@@ -12,13 +12,15 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.ToggleButton;
 
 import com.bumptech.glide.Glide;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 
-public class PerformFunctionOnSelectedBookActivity extends AppCompatActivity {
+public class PerformFunctionOnSelectedBookActivity extends AppCompatActivity implements
+        DBManager.DataBaseListener{
     TextView hyperTextLink;
     TextView title;
     TextView subtitle;
@@ -33,6 +35,7 @@ public class PerformFunctionOnSelectedBookActivity extends AppCompatActivity {
     Button reviewbtn;
     Button bookRatingBtn;
     String bookID;
+    ToggleButton favorite;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,6 +56,7 @@ public class PerformFunctionOnSelectedBookActivity extends AppCompatActivity {
         buyBtn=findViewById(R.id.buyThisBookBtn);
         reviewbtn=findViewById(R.id.ReviewCommentsBtn);
         bookRatingBtn=findViewById(R.id.RateBookBtn);
+        favorite=findViewById(R.id.favoriteIcon);
         hyperTextLink=findViewById(R.id.hyperTextLinkPerformFunc);
         showBookDescription(position);
         bookRatingBtn.setOnClickListener(new View.OnClickListener() {
@@ -73,13 +77,20 @@ public class PerformFunctionOnSelectedBookActivity extends AppCompatActivity {
                 startActivity(bookComments);
             }
         });
+        favorite.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                favToggleBtnFunc();
+            }
+        });
     }
 
     public void showBookDescription(int pos){
         String linkUrl=((MyApp)getApplication()).sb.getFullDescBookList().get(pos).getThumbnail();
         String url ="<a href=\"link\">"+linkUrl+"</a>";
+        String titleV="<b>Title: </b>";
         bookID=((MyApp)getApplication()).sb.getFullDescBookList().get(pos).getId();
-        title.setText("Title: "+((MyApp)getApplication()).sb.getFullDescBookList().get(pos).getTitle());
+        title.setText(Html.fromHtml(titleV)+((MyApp)getApplication()).sb.getFullDescBookList().get(pos).getTitle());
         title.setTextColor(getResources().getColor(R.color.purple_500));
         subtitle.setText("Subtitle: "+((MyApp)getApplication()).sb.getFullDescBookList().get(pos).getSubtitle());
         subtitle.setTextColor(getResources().getColor(R.color.purple_200));
@@ -114,7 +125,58 @@ public class PerformFunctionOnSelectedBookActivity extends AppCompatActivity {
         Glide.with(this).load(((MyApp)getApplication()).sb.getFullDescBookList().get(pos).
                 getThumbnail()).into(img);
 
+    }
+    public void favToggleBtnFunc(){
+        if(favorite.isChecked()){
+            int pos=((MyApp)getApplication()).pos;
+            ((MyApp)getApplication()).db.insertNewFavBookAsync((new
+                    Book(((MyApp)getApplication()).sb.getFullDescBookList().get(pos).getTitle(),
+                    ((MyApp)getApplication()).sb.getFullDescBookList().get(pos).getThumbnail())));
+//            ((MyApp)getApplication()).db.insertNewFavBookAsync((new
+//                    Book(((MyApp)getApplication()).sb.getFullDescBookList().get(pos).getTitle(),
+//                    ((MyApp)getApplication()).sb.getFullDescBookList().get(pos).getSubtitle(),
+//                    ((MyApp)getApplication()).sb.getFullDescBookList().get(pos).getAuthors(),
+//                    ((MyApp)getApplication()).sb.getFullDescBookList().get(pos).getPublisher(),
+//                    ((MyApp)getApplication()).sb.getFullDescBookList().get(pos).getPublishedDate(),
+//                    ((MyApp)getApplication()).sb.getFullDescBookList().get(pos).getDescription(),
+//                    ((MyApp)getApplication()).sb.getFullDescBookList().get(pos).getPageCount(),
+//                    ((MyApp)getApplication()).sb.getFullDescBookList().get(pos).getThumbnail(),
+//                    ((MyApp)getApplication()).sb.getFullDescBookList().get(pos).getPreviewLink(),
+//                    ((MyApp)getApplication()).sb.getFullDescBookList().get(pos).getinfoLink(),
+//                    ((MyApp)getApplication()).sb.getFullDescBookList().get(pos).getBuyLink())));
+            AlertDialog.Builder builder =new AlertDialog.Builder(PerformFunctionOnSelectedBookActivity.this);
+            builder.setMessage("Your comment saved.").show();
+        }
+        else{
+
+
+        }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        ((MyApp)getApplication()).db.listener=this;
+        ((MyApp)getApplication()).db.getBookDB(this);
+    }
+
+    @Override
+    public void insertingCommentsCompleted() {
 
     }
 
+    @Override
+    public void gettingCommentsCompleted(Comments[] list) {
+
+    }
+
+    @Override
+    public void insertingBooksCompleted() {
+
+    }
+
+    @Override
+    public void gettingFavBooksCompleted(Book[] list) {
+
+    }
 }

@@ -21,11 +21,11 @@ public class BookInfoRecyclerView extends
         this.context = context;
     }
 
-    ArrayList<Book> book_list;
+    public ArrayList<Book> book_list;
     Context context;
-    ItemClickListener listener;
+    public ItemClickListener listener;
 
-    interface ItemClickListener{
+    public interface ItemClickListener{
         public void onItemClick(int pos);
     }
     @NonNull
